@@ -1,19 +1,17 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import ApolloClient from "apollo-client";
-import { ApolloProvider } from "react-apollo";
+import ApolloClient from 'apollo-client';
+import { ApolloProvider } from 'react-apollo';
+import MovieList from './components/movie-list';
 
-const client = new ApolloClient ({});
+const client = new ApolloClient({});
 
 const Root = () => {
   return (
-  <ApolloProvider client={client}>
-    <h1>Bienvenue sur GraphQL Movie ;)</h1>
-  </ApolloProvider>
-  )
+    <ApolloProvider client={client}>
+      <MovieList />
+    </ApolloProvider>
+  );
 };
 
-ReactDOM.render(
-  <Root />,
-  document.querySelector('#root')
-);
+ReactDOM.render(<Root />, document.querySelector('#root'));
