@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { graphql } from 'react-apollo';
 import gql from 'graphql-tag';
+import { Link } from 'react-router';
 
 class MovieList extends Component {
   rendrMovies() {
@@ -22,6 +23,12 @@ class MovieList extends Component {
       <div>
         <h1>Liste de film</h1>
         <ul className='collection'>{this.rendrMovies()}</ul>
+        <Link
+          to='/movies/create'
+          className='btn-floating btn-large waves-effect waves-light blue right'
+        >
+          <i className='material-icons'>add</i>
+        </Link>
       </div>
     );
   }
