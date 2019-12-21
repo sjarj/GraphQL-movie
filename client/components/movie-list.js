@@ -6,7 +6,11 @@ class MovieList extends Component {
   rendrMovies() {
     if (!this.props.data.loading) {
       return this.props.data.movies.map(movie => {
-        return <li key={movie.id}>{movie.title}</li>;
+        return (
+          <li className='collection-item' key={movie.id}>
+            {movie.title}
+          </li>
+        );
       });
     } else {
       return <div>Loading....</div>;
@@ -14,7 +18,12 @@ class MovieList extends Component {
   }
 
   render() {
-    return <ul>{this.rendrMovies()}</ul>;
+    return (
+      <div>
+        <h1>Liste de film</h1>
+        <ul className='collection'>{this.rendrMovies()}</ul>
+      </div>
+    );
   }
 }
 const query = gql`
