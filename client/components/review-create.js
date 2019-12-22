@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { graphql, compose } from 'react-apollo';
 import createReviewMutation from '../queries/createReview';
+import readMovieQuery from '../queries/readMovie';
 
 class ReviewCreate extends Component {
   constructor(props) {
@@ -14,7 +15,10 @@ class ReviewCreate extends Component {
       event.preventDefault();
       this.props
         .createReviewMutation({
-          variables: { content: this.state.terms, movieId: this.props.movieId }
+          variables: { content: this.state.terms, movieId: this.props.movieId },
+          refetchQueries: [
+            { query: readMovieQuery, variables: { id: this.props.movieId } }
+          ]
         })
         .then(() => this.setState({ terms: '' }));
     }
