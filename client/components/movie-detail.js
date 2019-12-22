@@ -1,11 +1,15 @@
 import React, { Component } from 'react';
 import { graphql, compose } from 'react-apollo';
 import readMovieQuery from '../queries/readMovie';
+import ReviewCreate from './review-create';
 
 class MovieDetail extends Component {
   render() {
-    console.log(this.props);
-    return <div>MovieDetail</div>;
+    return (
+      <div>
+        <ReviewCreate movieId={this.props.params.id} />
+      </div>
+    );
   }
 }
 
