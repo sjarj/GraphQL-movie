@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router';
 import { graphql, compose } from 'react-apollo';
 import readMovieQuery from '../queries/readMovie';
 import ReviewCreate from './review-create';
-import { Link } from 'react-router';
+import ReviewList from './review-list';
 
 class MovieDetail extends Component {
   render() {
@@ -13,6 +14,7 @@ class MovieDetail extends Component {
       <div>
         <h1>Détail du film: {this.props.readMovieQuery.movie.title}</h1>
         <Link to='/movies'>Retour à la liste des films</Link>
+        <ReviewList reviews={this.props.readMovieQuery.movie.reviews} />
         <ReviewCreate movieId={this.props.params.id} />
       </div>
     );
