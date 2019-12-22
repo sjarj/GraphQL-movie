@@ -12,7 +12,11 @@ class ReviewCreate extends Component {
   handleSubmitForm(event) {
     if (event.key === 'Enter') {
       event.preventDefault();
-      // requete graphql
+      this.props
+        .createReviewMutation({
+          variables: { content: this.state.terms, movieId: this.props.movieId }
+        })
+        .then(() => this.setState({ terms: '' }));
     }
   }
 
@@ -27,10 +31,15 @@ class ReviewCreate extends Component {
             value={this.state.terms}
             onKeyPress={this.handleSubmitForm.bind(this)}
           />
+          <label className='active'>Ajouter une review</label>
         </form>
       </div>
     );
   }
 }
 
-export default compose(graphql(createReviewMutation))(ReviewCreate);
+export default compose(
+  graphql(createReviewMutation, {
+    name: 'createReviewMutation'
+  })
+)(ReviewCreate);
