@@ -1,10 +1,25 @@
 import React, { Component } from 'react';
+import { graphql, compose } from 'react-apollo';
+import likeReviewMutation from '../queries/likeReview';
 
-export default class ReviewList extends Component {
+class ReviewList extends Component {
+  likeReview(id) {
+    this.props.likeReviewMutation({ variables: { id } });
+  }
+
   renderReview() {
     return this.props.reviews.map(review => (
       <li key={review.id} className='collection-item'>
         {review.content}
+        <div className='secondary-content delete_button'>
+          <i
+            className='material-icons '
+            onClick={() => this.likeReview(review.id)}
+          >
+            thumb_up
+          </i>
+          {review.likes}
+        </div>
       </li>
     ));
   }
@@ -19,3 +34,7 @@ export default class ReviewList extends Component {
     );
   }
 }
+
+export default compose(
+  graphql(likeReviewMutation, { name: 'likeReviewMutation' })
+)(ReviewList);

@@ -15,10 +15,7 @@ class ReviewCreate extends Component {
       event.preventDefault();
       this.props
         .createReviewMutation({
-          variables: { content: this.state.terms, movieId: this.props.movieId },
-          refetchQueries: [
-            { query: readMovieQuery, variables: { id: this.props.movieId } }
-          ]
+          variables: { content: this.state.terms, movieId: this.props.movieId }
         })
         .then(() => this.setState({ terms: '' }));
     }

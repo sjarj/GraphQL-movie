@@ -1,10 +1,10 @@
 import gql from 'graphql-tag';
 
 export default gql`
-  mutation DeleteMovie($id: ID) {
-    deleteMovie(id: $id) {
+  mutation likeReview($id: ID) {
+    likeReview(id: $id) {
       id
-      title
+      likes
     }
   }
 `;
