@@ -8,7 +8,7 @@ class MovieCreate extends Component {
   constructor(props) {
     super(props);
 
-    this.state = { terms: '' };
+    this.state = { terms: '', errors: [] };
   }
 
   handleSubmitForm(event) {
@@ -23,8 +23,16 @@ class MovieCreate extends Component {
         })
         .then(() => {
           hashHistory.push('/movies');
+        })
+        .catch(errors => {
+          const errorsMessages = errors.graphQLErrors.map(err => err.message);
+          this.setState({ errors: errorsMessages });
         });
     }
+  }
+
+  renderErrors() {
+    return this.state.errors.map(m => m);
   }
 
   render() {
@@ -39,6 +47,7 @@ class MovieCreate extends Component {
             onKeyPress={this.handleSubmitForm.bind(this)}
           />
           <label className='active'>Titre</label>
+          <div className='row errors'>{this.renderErrors()}</div>
         </form>
       </div>
     );
